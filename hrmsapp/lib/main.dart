@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Employee App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         appBarTheme: AppBarTheme.of(context).copyWith(
           iconTheme: IconTheme.of(context).copyWith(color: Colors.purple),
           backgroundColor: Colors.white,
@@ -27,6 +27,13 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           centerTitle: false,
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.purple,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
       ),
       home: const SplashScreen(),

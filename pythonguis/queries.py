@@ -33,6 +33,3 @@ updsalary = "UPDATE Payrolls SET salary=%s, gross_salary=%s, tax_amt=%s, net_sal
 fetch_applications = "SELECT * FROM Applications"
 filter_applications = "SELECT * FROM Applications WHERE status=%s"
 update_application = "UPDATE Applications SET status=%s WHERE id=%s"
-
-
-

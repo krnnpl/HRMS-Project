@@ -18,6 +18,7 @@ class ChangePasswordView extends StatefulWidget {
 class _ChangePasswordViewState extends State<ChangePasswordView> {
   final _formKey = GlobalKey<FormState>();
   String _newpassword = '';
+  // ignore: unused_field
   String _newpassword1 = '';
   int? userId;
 
@@ -76,12 +77,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () async {
-                          print('Button Pressed');
                           if (_formKey.currentState?.validate() == true) {
                             userId = await getUserId();
-
                             await _changepassword();
-                            print("Password Changed");
                             Get.defaultDialog(
                                 title: "Password changed Successfully",
                                 content: const Text("Login again"),
@@ -137,8 +135,8 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
       await conn.close();
 
       if (result.isNotEmpty) {
-        print(result);
-        print("changed");
+        Get.defaultDialog(
+            title: "Success", content: const Text("Updated successfully"));
       }
     } catch (e) {
       Get.defaultDialog(

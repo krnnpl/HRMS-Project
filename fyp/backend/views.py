@@ -1,46 +1,16 @@
-from django.shortcuts import render
 from backend.serializers import EmployeeSerializer, DesignationSerializer, AttendanceSerializer, PayrollSerializer, ApplicationSerializer
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import status
-import json
-
+from rest_framework import status,permissions
 from backend.models import Employee, Designation, Attendance, Payroll, Application
-
-# Create your views here.
-
-# @api_view(['POST'])
-# def login(request):
-#     if request.method=='POST':
-#         userid = request.data.get('userid')
-#         password = request.data.get('password')
-#         data = (userid,password)
-#         serializer = EmployeeSerializer(data)
-#         if serializer.validate(data):
-#             return Response({"id":"id here","message": serializer.data})
-#         else:
-#             return Response({"error": "Invalid userid or password"}, status=status.HTTP_401_UNAUTHORIZED)
-
-
-        # try:
-        #     employee = Employee.objects.get(name=name,password= password)
-        #     print(employee)
-        # except Employee.DoesNotExist:
-        #     return Response({"error": "Invalid userid or password"}, status=status.HTTP_401_UNAUTHORIZED)
-        # if (password == employee.password):
-        #     serializer = EmployeeSerializer(name)
-        #     return Response(serializer.data)
-        # else:
-        #     return Response({"error": "Invalid userid or password"}, status=status.HTTP_401_UNAUTHORIZED)
-
-
 from django.contrib.auth import login
-
-from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 
+from backend.models import Company
+from backend.serializers import CompanySerializer
+
+# Create your views here.
 class LoginAPI(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request, format=None):
@@ -51,45 +21,6 @@ class LoginAPI(KnoxLoginView):
         print(username)
         login(request, username)
         return super(LoginAPI, self).post(request, format=None)
-    
-# from django.contrib.auth import authenticate
-# # from user_rl.renderers import UserRenderer
-# from rest_framework_simplejwt.tokens import RefreshToken
-# from rest_framework.permissions import IsAuthenticated
-# from rest_framework.permissions import IsAdminUser, IsAuthenticated
-# from datetime import datetime
-# # from user_rl.models import User
-# # from rest_framework import viewsets
-# # from user_rl.models import User
-
-
-# def get_tokens_for_employee(hrmsuser):
-#     refresh = RefreshToken.for_user(hrmsuser)
-#     time_stamp = datetime.now()
-#     return {
-#         'refresh': str(refresh),
-#         'access': str(refresh.access_token),
-#         'time_stamp':str(time_stamp)
-#     }
-
-# class EmployeeLoginView(APIView):
-#     # renderer_classes = [UserRenderer]
-#     # @action(detail= False)
-#     def post(self, request,format=None):
-#         serializer = EmployeeLoginSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         userid = serializer.data.get('userid')
-#         password = serializer.data.get('password')
-#         print(userid,password)
-#         employee = authenticate(userid=userid, password=password)
-#         print(employee)
-#         if employee is not None:
-#             token = get_tokens_for_employee(employee)
-#             return Response({'token': token,'message':'login success'}, status= status.HTTP_201_CREATED)
-#         else:
-#             return Response({'errors':{'non_field_errors':['Email or Password is not Valid']}}, status=status.HTTP_404_NOT_FOUND)
-
-
 
 
 @api_view(['GET'])
@@ -99,6 +30,12 @@ def employees(request):
         serializer = EmployeeSerializer(queryset,many=True)
         return Response({"message" : serializer.data})
 
+@api_view(['GET'])
+def companys(request):
+    if request.method=='GET':
+        queryset = Company.objects.first()
+        serializer = CompanySerializer(queryset)
+        return Response({"message" : serializer.data})
 
 @api_view(['GET'])
 def viewEmployee(request,pk):

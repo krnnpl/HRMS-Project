@@ -9,6 +9,7 @@ class AttendanceController extends GetxController {
   var client = http.Client();
   var attendance = {}.obs;
   int? userId = 0;
+  var isLoading = true.obs;
 
   Future<void> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -17,14 +18,11 @@ class AttendanceController extends GetxController {
 
   Future fetchAttendance() async {
     try {
+      isLoading(true);
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getInt('userId');
-      // print('The user ID is $userId');
-      // print(userId);
-      var response =
-          // await client.get(Uri.parse("http://127.0.0.1:8000/api/employee/2/"));
-          await client.get(Uri.parse(
-              "http://127.0.0.1:8000/api/employeeattendance/$userId/"));
+      var response = await client.get(
+          Uri.parse("http://127.0.0.1:8000/api/employeeattendance/$userId/"));
       if (response.statusCode == 200) {
         attendance.value = jsonDecode(response.body);
       } else {
@@ -35,6 +33,8 @@ class AttendanceController extends GetxController {
         title: "Remote service error",
         content: Text(e.toString()),
       );
+    } finally {
+      isLoading(false);
     }
     return null;
   }
@@ -43,7 +43,6 @@ class AttendanceController extends GetxController {
   void onInit() {
     fetchAttendance();
     getUserId();
-    // fetchDesignations();
     super.onInit();
   }
 }

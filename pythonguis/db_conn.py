@@ -25,8 +25,3 @@ def create_connection():
         return mydb
     except mysql.connector.Error as error:
             print("Error: {}".format(error))
-
-
-
-
-

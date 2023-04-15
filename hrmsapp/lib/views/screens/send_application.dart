@@ -50,11 +50,21 @@ class _SendApplicationState extends State<SendApplication> {
         child: Column(
           children: [
             const WidgetGap(),
-            const Text("Please fill up following details"),
+            const Text(
+              "Please fill up following details",
+              textScaleFactor: 1.5,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                color: Colors.purple,
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text("Type"),
+                const Text(
+                  "Type",
+                  textScaleFactor: 1.2,
+                ),
                 DropdownButton<String>(
                   value: typeValue,
                   items: <String>['Leave Request', 'Suggestions', 'Allowance']
@@ -75,41 +85,64 @@ class _SendApplicationState extends State<SendApplication> {
                 ),
               ],
             ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              validator: (value) {
-                if (value?.isEmpty == true) {
-                  return 'Please enter the title';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                setState(() {
-                  title = value;
-                });
-              },
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(16.0),
+                  labelText: 'Title',
+                  border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(15.0),
+                    borderSide: new BorderSide(color: Colors.purple),
+                  ),
+                ),
+                validator: (value) {
+                  if (value?.isEmpty == true) {
+                    return 'Please enter the title';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  setState(() {
+                    title = value;
+                  });
+                },
+              ),
             ),
             const WidgetGap(),
-            TextFormField(
-              maxLines: 9,
-              decoration: const InputDecoration(labelText: 'Reason'),
-              validator: (value) {
-                if (value?.isEmpty == true) {
-                  return 'Please enter your reason';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                setState(() {
-                  reason = value;
-                });
-              },
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextFormField(
+                maxLines: 9,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(16.0),
+                  labelText: 'Reason',
+                  border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(15.0),
+                    borderSide: new BorderSide(color: Colors.purple),
+                  ),
+                ),
+                validator: (value) {
+                  if (value?.isEmpty == true) {
+                    return 'Please enter your reason';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  setState(() {
+                    reason = value;
+                  });
+                },
+              ),
             ),
             const WidgetGap(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text("Select Date"),
+                const Text(
+                  "Select Date",
+                  textScaleFactor: 1.2,
+                ),
                 ElevatedButton(
                   onPressed: _presentDatePicker,
                   child: Text(
@@ -124,7 +157,10 @@ class _SendApplicationState extends State<SendApplication> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text("Days"),
+                const Text(
+                  "Days",
+                  textScaleFactor: 1.2,
+                ),
                 DropdownButton<String>(
                   // Step 3.
                   value: dayValue,
@@ -152,13 +188,14 @@ class _SendApplicationState extends State<SendApplication> {
               ],
             ),
             const WidgetGap(),
+            const WidgetGap(),
+            const WidgetGap(),
             SizedBox(
-              width: Get.size.width,
+              width: Get.size.width * 0.8,
               height: 50,
               child: ElevatedButton(
                 onPressed: () async {
                   userId = await getUserId();
-                  print("$typeValue,$title,$reason,$_selectedDate,$dayValue");
                   Map application = {
                     "type": typeValue,
                     "title": title,
@@ -168,7 +205,6 @@ class _SendApplicationState extends State<SendApplication> {
                     "status": "Pending",
                     "employee_id": userId
                   };
-                  print(application);
                   applicationController.postApplication(application);
                 },
                 child: const Text(

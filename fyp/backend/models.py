@@ -1,6 +1,16 @@
 from django.db import models
 
 # Create your models here.
+
+class Company(models.Model):
+    company_name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=100)
+    email = models.EmailField()
+    estd = models.CharField(max_length=100)
+    class Meta:
+        db_table = 'Company'
+
 class Designation(models.Model):
     # id = models.IntegerField()
     name = models.CharField(max_length=100)

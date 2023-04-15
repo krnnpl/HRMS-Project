@@ -10,6 +10,7 @@ class EmployeeController extends GetxController {
   var employee = {}.obs;
   int? userId = 0;
   var designationList = [].obs;
+  var isLoading = true.obs;
 
   // var id = DbConstants.id;
   Future<void> getUserId() async {
@@ -19,14 +20,11 @@ class EmployeeController extends GetxController {
 
   Future fetchEmployee() async {
     try {
+      isLoading(true);
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getInt('userId');
-      // print('The user ID is $userId');
-      // print(userId);
-      var response =
-          // await client.get(Uri.parse("http://127.0.0.1:8000/api/employee/2/"));
-          await client
-              .get(Uri.parse("http://127.0.0.1:8000/api/employee/$userId/"));
+      var response = await client
+          .get(Uri.parse("http://127.0.0.1:8000/api/employee/$userId/"));
       if (response.statusCode == 200) {
         employee.value = jsonDecode(response.body);
       } else {
@@ -37,6 +35,8 @@ class EmployeeController extends GetxController {
         title: "Remote service error",
         content: Text(e.toString()),
       );
+    } finally {
+      isLoading(false);
     }
     return null;
   }
@@ -45,7 +45,6 @@ class EmployeeController extends GetxController {
   void onInit() {
     fetchEmployee();
     getUserId();
-    // fetchDesignations();
     super.onInit();
   }
 }

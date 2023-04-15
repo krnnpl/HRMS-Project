@@ -2,12 +2,14 @@ from rest_framework import serializers
 from backend.models import Employee, Designation, Attendance, Payroll, Application
 from django.core.exceptions import ObjectDoesNotExist
 
+from backend.models import Company
+
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields =['id','name','username','email','number','address','panno','password','is_admin','designation_id']
-        depth = 1
+        fields ='__all__'
+        depth = 2
     def validate(self, data):
         username = data.get("username")
         password = data.get("password")
@@ -26,11 +28,11 @@ class EmployeeSerializer(serializers.ModelSerializer):
         data["employee"] = employee
         return data
 
-# class EmployeeLoginSerializer(serializers.ModelSerializer):
-#   username = serializers.CharField(max_length=255)
-#   class Meta:
-#     model = Employee
-#     fields = ['username', 'password']
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields ='__all__'
+        depth = 1
 
 class DesignationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,20 +44,20 @@ class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields ='__all__'
-        depth = 1
+        depth = 2
 
 class PayrollSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payroll
         fields ='__all__'
-        depth = 1
+        depth = 2
 
 class ApplicationSerializer(serializers.ModelSerializer):
     employee_id = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all())
 
     class Meta:
         model = Application
-        fields = ['id','type','title','reason','start_date','days','status','employee_id']
+        fields = '__all__'
         depth = 2
     def create(self, validated_data):
         employee_id = validated_data.pop('employee_id')

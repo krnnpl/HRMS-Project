@@ -7,9 +7,7 @@ from .views import LoginAPI
 
 
 urlpatterns = [
-    # login
-    # path('login/', views.login, name='login'),
-
+    path('company/', views.companys, name='company'),
     # all employess
     path('employees/', views.employees, name='employee'),
     # specific employee

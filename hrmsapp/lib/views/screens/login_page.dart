@@ -30,8 +30,11 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const Text(
                 "Login",
-                textScaleFactor: 1.4,
-                style: TextStyle(fontSize: 26.0),
+                textScaleFactor: 3,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.purple,
+                ),
               ),
               const WidgetGap(),
               const WidgetGap(),
@@ -121,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
       if (result.isNotEmpty) {
         final prefs = await SharedPreferences.getInstance();
         prefs.setInt('userId', result.first[0]);
-        var id = result.first[0];
+        // var id = result.first[0];
 
         Get.off(const BasePage());
       } else {

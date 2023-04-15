@@ -38,7 +38,7 @@ class CompanyPage extends StatelessWidget {
                         child: Text(
                           "Company name: ${companyController.company['message']?['company_name'] ?? ''}",
                           textScaleFactor: 1.1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -48,7 +48,7 @@ class CompanyPage extends StatelessWidget {
                         child: Text(
                           "estd:  ${companyController.company['message']?['estd'] ?? ''}",
                           textScaleFactor: 1.1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -58,7 +58,7 @@ class CompanyPage extends StatelessWidget {
                         child: Text(
                           "address: ${companyController.company['message']?['address'] ?? ''}",
                           textScaleFactor: 1.1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -68,7 +68,7 @@ class CompanyPage extends StatelessWidget {
                         child: Text(
                           "Phone number: ${companyController.company['message']?['phone_number'] ?? ''}",
                           textScaleFactor: 1.1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -78,7 +78,7 @@ class CompanyPage extends StatelessWidget {
                         child: Text(
                           "email: ${companyController.company['message']?['email'] ?? ''}",
                           textScaleFactor: 1.1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                         ),

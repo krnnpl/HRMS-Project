@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const SplashScreen(),
+      defaultTransition: Transition.fadeIn,
     );
   }
 }

@@ -89,11 +89,11 @@ class _SendApplicationState extends State<SendApplication> {
               padding: const EdgeInsets.all(20.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(16.0),
+                  contentPadding: const EdgeInsets.all(16.0),
                   labelText: 'Title',
                   border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(15.0),
-                    borderSide: new BorderSide(color: Colors.purple),
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: const BorderSide(color: Colors.purple),
                   ),
                 ),
                 validator: (value) {
@@ -115,11 +115,11 @@ class _SendApplicationState extends State<SendApplication> {
               child: TextFormField(
                 maxLines: 9,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(16.0),
+                  contentPadding: const EdgeInsets.all(16.0),
                   labelText: 'Reason',
                   border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(15.0),
-                    borderSide: new BorderSide(color: Colors.purple),
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: const BorderSide(color: Colors.purple),
                   ),
                 ),
                 validator: (value) {

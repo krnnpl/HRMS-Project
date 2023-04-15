@@ -6,7 +6,6 @@ import 'package:mysql1/mysql1.dart';
 import '../widgets/widget_gap.dart';
 
 class LoginPage extends StatefulWidget {
-  // static var authtoken = "";
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -21,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      // appBar: AppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -108,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     try {
       var conn = await MySqlConnection.connect(ConnectionSettings(
-        // host: 'localhost',
         host: '127.0.0.1',
         port: 3306,
         user: 'root',
@@ -124,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
       if (result.isNotEmpty) {
         final prefs = await SharedPreferences.getInstance();
         prefs.setInt('userId', result.first[0]);
-        // var id = result.first[0];
 
         Get.off(const BasePage());
       } else {

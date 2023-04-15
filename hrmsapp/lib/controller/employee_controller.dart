@@ -11,8 +11,6 @@ class EmployeeController extends GetxController {
   int? userId = 0;
   var designationList = [].obs;
   var isLoading = true.obs;
-
-  // var id = DbConstants.id;
   Future<void> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
     userId = prefs.getInt('userId');

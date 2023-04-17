@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hrmsapp/bindings/controller_bindings.dart';
 
 import 'views/screens/splash_screen.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      initialBinding: ControllerBinding(),
       home: const SplashScreen(),
       defaultTransition: Transition.fadeIn,
     );

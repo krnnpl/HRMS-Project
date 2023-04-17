@@ -36,7 +36,9 @@ class ApplicationController extends GetxController {
           title: "Success",
           content: const Text("Successfully sent application"),
           confirm: ElevatedButton(
-            onPressed: () => Get.offAll(const BasePage()),
+            onPressed: () => {
+              Get.to(const BasePage()),
+            },
             child: const Text("OK"),
           ),
         );

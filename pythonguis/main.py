@@ -25,6 +25,8 @@ while True:
     if event == pg.WIN_CLOSED or event == 'Exit':
       window.close()
       break
+    if event == 'About...':
+        pg.popup('This is my awesome app!')
 
 #  ### HOME PAGE ### #
     if event == "Admin Login":
